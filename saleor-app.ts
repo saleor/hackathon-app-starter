@@ -15,7 +15,6 @@ switch (process.env.APL) {
     apl = new VercelAPL();
     break;
   case "upstash":
-    // Require `UPSTASH_URL` and `UPSTASH_TOKEN` environment variables
     apl = new UpstashAPL();
     break;
   default:
