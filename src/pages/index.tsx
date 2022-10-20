@@ -1,13 +1,10 @@
 import { NextPage } from "next";
-import { useAppBridge, withAuthorization } from "@saleor/app-sdk/app-bridge";
-import { Box, Card, CardHeader, Typography } from "@material-ui/core";
+import { withAuthorization } from "@saleor/app-sdk/app-bridge";
+import { Card, CardHeader, Typography } from "@material-ui/core";
 import { List, ListBody, ListItem, ListItemCell } from "@saleor/macaw-ui";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 const IndexPage: NextPage = () => {
-  const { appBridgeState } = useAppBridge();
-
   return (
     <div>
       <Typography style={{ marginBottom: 30 }} variant="h1">
