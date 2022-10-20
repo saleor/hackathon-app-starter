@@ -7,13 +7,12 @@ import Link from "next/link";
 
 const IndexPage: NextPage = () => {
   const { appBridgeState } = useAppBridge();
-  const { push } = useRouter();
 
   return (
     <div>
-      <Box mb={4}>
-        <Typography variant="h1">Hey, I am app with many integrations</Typography>
-      </Box>
+      <Typography style={{ marginBottom: 30 }} variant="h1">
+        Hey, I am app with many integrations
+      </Typography>
       <Card>
         <CardHeader title="Configure integrations"></CardHeader>
         <List gridTemplate={["1fr"]}>
@@ -23,7 +22,7 @@ const IndexPage: NextPage = () => {
                 <Link href="/integrations/one">Some integration 1</Link>
               </ListItemCell>
             </ListItem>
-            <ListItem >
+            <ListItem>
               <ListItemCell>
                 <Link href="/integrations/two">Some integration 2</Link>
               </ListItemCell>
