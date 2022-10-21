@@ -33,7 +33,7 @@ const sendResponse = async (
   res.status(statusCode).json({
     success: statusCode === 200,
     data: {
-      booleanOption: (await settings.get("booleanOption")) || false,
+      booleanOption: JSON.parse((await settings.get("booleanOption")) ?? "false"),
       token: obfuscateSecret((await settings.get("token", domain)) || ""),
     },
   });
@@ -46,7 +46,7 @@ const sendResponse = async (
  * characters which should be enough for the user to know if thats a right value.
  */
 const obfuscateSecret = (secret: string) => {
-  return "*".repeat(secret.length - 4) + secret.substring(secret.length - 4);
+  return "*".repeat(secret.length - 2) + secret.substring(secret.length - 2);
 };
 
 const handler: NextApiHandler = async (req, res) => {
@@ -78,15 +78,15 @@ const handler: NextApiHandler = async (req, res) => {
   } else if (req.method === "POST") {
     const { token, booleanOption } = req.body as SettingsUpdateApiRequest;
 
-    if (token && booleanOption) {
-        /**
-         * You can set metadata one by one, but passing array of the values
-         * will spare additional roundtrips to the Saleor API.
-         * After mutation is made, internal cache of the manager
-         * will be automatically updated
-         */
+    if (token && booleanOption !== undefined) {
+      /**
+       * You can set metadata one by one, but passing array of the values
+       * will spare additional roundtrips to the Saleor API.
+       * After mutation is made, internal cache of the manager
+       * will be automatically updated
+       */
       await settings.set([
-        { key: "token", value: token, domain: saleorDomain  },
+        { key: "token", value: token, domain: saleorDomain },
         { key: "booleanOption", value: JSON.stringify(booleanOption), domain: saleorDomain },
       ]);
       await sendResponse(res, 200, settings, saleorDomain);

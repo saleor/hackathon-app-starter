@@ -51,7 +51,7 @@ const IntegrationOne: NextPage = () => {
         onClick={() => {
           push("/");
         }}
-        style={{ display: "block" }}
+        style={{ display: "block", marginBottom: 30 }}
         variant="secondary"
       >
         Back
@@ -77,7 +77,7 @@ const IntegrationOne: NextPage = () => {
           })}
         >
           <div style={{ padding: "0 30px 30px" }}>
-            <TextField disabled={loading} label="Example token" {...register("token")} fullWidth />
+            <TextField variant="standard" disabled={loading} label="Example token" {...register("token")} fullWidth />
             <FormControlLabel
               disabled={loading}
               control={<Checkbox {...register("booleanOption")} />}
